@@ -23,8 +23,8 @@ const PersonalInfo = () => {
         validateOnBlur={true}
         initialValues={{
           ...user,
-          photoURL: user.photoURL
-            ? user.photoURL
+          photoURL: user?.photoURL
+            ? user?.photoURL
             : "/assets/images/placeholder.jpg",
         }}
         validationSchema={validationSchema}

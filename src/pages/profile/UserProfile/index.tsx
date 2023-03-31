@@ -7,6 +7,7 @@ import { BiUser } from "react-icons/bi";
 import { AiOutlineLock } from "react-icons/ai";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { IoShareSocialOutline } from "react-icons/io5";
+import {HiUserAdd} from 'react-icons/hi';
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import AccountTabsWrapper from "./AccountTabsWrapper";
 import PersonalInfo from "./PersonalInfo";
@@ -17,6 +18,7 @@ import Notification from "./Notification";
 import accountData from "@crema/services/db/profile";
 import AppAnimate from "@crema/core/AppAnimate";
 import { Fonts } from "../../../shared/constants/AppEnums";
+// import CreateUser from "./CreateUser/CreateUser";
 
 function a11yProps(index: number) {
   return {
@@ -46,6 +48,11 @@ const tabs = [
     id: 5,
     icon: <NotificationsNoneIcon />,
     name: <IntlMessages id="healthCare.notification" />,
+  },
+  {
+    id: 6,
+    icon: <HiUserAdd />,
+    name: <IntlMessages id="common.createUser" />,
   },
 ];
 
@@ -97,6 +104,8 @@ const Account = () => {
             {value === 2 && <Information />}
             {value === 3 && <Social social={accountData.member} />}
             {value === 4 && <Notification />}
+            {/* {value === 5 && <CreateUser />} */}
+            {value === 5 && null}
           </Box>
         </AccountTabsWrapper>
       </AppAnimate>
