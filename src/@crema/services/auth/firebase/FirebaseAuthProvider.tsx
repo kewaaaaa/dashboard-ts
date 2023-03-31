@@ -19,9 +19,16 @@ import {
   fetchStart,
   fetchSuccess,
 } from "../../../../redux/actions";
+import axios from "axios";
+import Alert from "@mui/material/Alert";
 
+interface IUser {
+  uid?: string;
+  displayName?: string;
+  email?: string;
+}
 interface FirebaseContextProps {
-  user: AuthUser | null | undefined;
+  user: AuthUser | null | undefined | IUser | string;
   isAuthenticated: boolean;
   isLoading: boolean;
 }
@@ -73,6 +80,7 @@ const FirebaseAuthProvider: React.FC<FirebaseAuthProviderProps> = ({
     isAuthenticated: false,
   });
   const dispatch = useDispatch();
+  console.log(firebaseData);
 
   useEffect(() => {
     const getAuthUser = auth.onAuthStateChanged(
@@ -147,25 +155,43 @@ const FirebaseAuthProvider: React.FC<FirebaseAuthProviderProps> = ({
     email,
     password,
   }: SignInProps) => {
-    console.log("1");
-    dispatch(fetchStart());
-    console.log("2");
-    try {
-      const { user } = await auth.signInWithEmailAndPassword(email, password);
+    if (localStorage.getItem('token')) {
+      console.log('token true')
       setFirebaseData({
-        user: user as AuthUser,
+        user: null,
         isAuthenticated: true,
         isLoading: false,
       });
-      console.log("3");
-      dispatch(fetchSuccess());
-    } catch ({ message }) {
-      setFirebaseData({
-        ...firebaseData,
-        isAuthenticated: false,
-        isLoading: false,
-      });
-      dispatch(fetchError(message as string));
+    } else {
+      console.log('token false')
+      dispatch(fetchStart());
+      try {
+        const response = await axios.post("http://3.138.61.64/auth/login", {
+          email,
+          password,
+        });
+        localStorage.setItem("token", response?.data?.access_token);
+        if (response?.data?.access_token) {
+          try {
+            // const { user } = await auth.signInWithEmailAndPassword(email, password);
+            setFirebaseData({
+              user: null,
+              isAuthenticated: true,
+              isLoading: false,
+            });
+            dispatch(fetchSuccess());
+          } catch ({ message }) {
+            setFirebaseData({
+              ...firebaseData,
+              isAuthenticated: false,
+              isLoading: false,
+            });
+            dispatch(fetchError(message as string));
+          }
+        } else <Alert severity="error">'error'</Alert>;
+      } catch (e) {
+        <Alert severity="error">{e?.response?.data?.message}</Alert>;
+      }
     }
   };
   const createUserWithEmailAndPassword = async ({
@@ -204,6 +230,7 @@ const FirebaseAuthProvider: React.FC<FirebaseAuthProviderProps> = ({
   };
 
   const logout = async () => {
+    localStorage.removeItem('token')
     setFirebaseData({ ...firebaseData, isLoading: true });
     try {
       await auth.signOut();

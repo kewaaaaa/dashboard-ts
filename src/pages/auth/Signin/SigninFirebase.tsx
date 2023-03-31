@@ -1,29 +1,30 @@
 import React from "react";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
 import { useIntl } from "react-intl";
 import IntlMessages from "@crema/utility/IntlMessages";
 import Box from "@mui/material/Box";
 import AppTextField from "@crema/core/AppFormComponents/AppTextField";
-import Checkbox from "@mui/material/Checkbox";
+// import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
+// import IconButton from "@mui/material/IconButton";
 import AppInfoView from "@crema/core/AppInfoView";
 import { useAuthMethod } from "@crema/utility/AuthHooks";
 import { Fonts } from "../../../shared/constants/AppEnums";
-import { AiOutlineGoogle, AiOutlineTwitter } from "react-icons/ai";
-import { FaFacebookF } from "react-icons/fa";
-import { BsGithub } from "react-icons/bs";
+// import { AiOutlineGoogle, AiOutlineTwitter } from "react-icons/ai";
+// import { FaFacebookF } from "react-icons/fa";
+// import { BsGithub } from "react-icons/bs";
 
 const SigninFirebase = () => {
-  const { signInWithEmailAndPassword, signInWithPopup } = useAuthMethod();
-  const navigate = useNavigate();
+  // const { signInWithEmailAndPassword, signInWithPopup } = useAuthMethod();
+  const { signInWithEmailAndPassword } = useAuthMethod();
+  // const navigate = useNavigate();
   const { messages } = useIntl();
 
-  const onGoToForgetPassword = () => {
-    navigate("/forget-password");
-  };
+  // const onGoToForgetPassword = () => {
+  //   navigate("/forget-password");
+  // };
 
   const validationSchema = yup.object({
     email: yup
@@ -35,14 +36,17 @@ const SigninFirebase = () => {
       .required(String(messages["validation.passwordRequired"])),
   });
 
+  if (localStorage.getItem("token"))
+    signInWithEmailAndPassword({ email: "email", password: "password" });
+
   return (
     <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
       <Box sx={{ flex: 1, display: "flex", flexDirection: "column", mb: 5 }}>
         <Formik
           validateOnChange={true}
           initialValues={{
-            email: "crema.demo@gmail.com",
-            password: "Pass@1!@all",
+            email: null,
+            password: null,
           }}
           validationSchema={validationSchema}
           onSubmit={(data, { setSubmitting }) => {
@@ -84,7 +88,7 @@ const SigninFirebase = () => {
                 />
               </Box>
 
-              <Box
+              {/* <Box
                 sx={{
                   mb: { xs: 3, xl: 4 },
                 }}
@@ -118,7 +122,7 @@ const SigninFirebase = () => {
                 >
                   <IntlMessages id="common.forgetPassword" />
                 </Box>
-              </Box>
+              </Box> */}
 
               <div>
                 <Button
@@ -142,7 +146,7 @@ const SigninFirebase = () => {
         </Formik>
       </Box>
 
-      <Box
+      {/* <Box
         sx={{
           color: "grey.500",
           mb: { xs: 5, md: 7 },
@@ -165,9 +169,9 @@ const SigninFirebase = () => {
             <IntlMessages id="common.signup" />
           </Link>
         </Box>
-      </Box>
+      </Box> */}
 
-      <Box
+      {/* <Box
         sx={{
           display: "flex",
           alignItems: "center",
@@ -234,7 +238,7 @@ const SigninFirebase = () => {
             <AiOutlineTwitter />
           </IconButton>
         </Box>
-      </Box>
+      </Box> */}
 
       <AppInfoView />
     </Box>
