@@ -29,11 +29,11 @@ const UserInfo: React.FC<UserInfoProps> = ({ color = "text.secondary" }) => {
   };
 
   const getUserAvatar = () => {
-    if (user.displayName) {
-      return user.displayName.charAt(0).toUpperCase();
+    if (user?.displayName) {
+      return user?.displayName.charAt(0).toUpperCase();
     }
-    if (user.email) {
-      return user.email.charAt(0).toUpperCase();
+    if (user?.email) {
+      return user?.email.charAt(0).toUpperCase();
     }
   };
 
@@ -51,7 +51,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ color = "text.secondary" }) => {
         className="user-info-view"
       >
         <Box sx={{ py: 0.5 }}>
-          {user.photoURL ? (
+          {user?.photoURL ? (
             <Avatar
               sx={{
                 height: 40,
@@ -59,7 +59,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ color = "text.secondary" }) => {
                 fontSize: 24,
                 backgroundColor: orange[500],
               }}
-              src={user.photoURL}
+              src={user?.photoURL}
             />
           ) : (
             <Avatar
@@ -101,7 +101,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ color = "text.secondary" }) => {
               }}
               component="span"
             >
-              {user.displayName ? user.displayName : "Admin User "}
+              {user?.displayName ? user?.displayName : "Admin User "}
             </Box>
             <Box
               sx={{

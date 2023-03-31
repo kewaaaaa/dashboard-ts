@@ -24,11 +24,11 @@ const UserInfo = () => {
   };
 
   const getUserAvatar = () => {
-    if (user.displayName) {
-      return user.displayName.charAt(0).toUpperCase();
+    if (user?.displayName) {
+      return user?.displayName.charAt(0).toUpperCase();
     }
-    if (user.email) {
-      return user.email.charAt(0).toUpperCase();
+    if (user?.email) {
+      return user?.email.charAt(0).toUpperCase();
     }
   };
 
@@ -44,14 +44,14 @@ const UserInfo = () => {
       }}
     >
       <Box onClick={handleClick}>
-        {user.photoURL ? (
+        {user?.photoURL ? (
           <Avatar
             sx={{
               height: 30,
               width: 30,
               backgroundColor: orange[500],
             }}
-            src={user.photoURL}
+            src={user?.photoURL}
           />
         ) : (
           <Avatar
@@ -88,13 +88,13 @@ const UserInfo = () => {
               mr: 3.5,
             }}
           >
-            {user.photoURL ? (
+            {user?.photoURL ? (
               <Avatar
                 sx={{
                   height: 40,
                   width: 40,
                 }}
-                src={user.photoURL}
+                src={user?.photoURL}
               />
             ) : (
               <Avatar
@@ -122,7 +122,7 @@ const UserInfo = () => {
               }}
               component="span"
             >
-              {user.displayName ? user.displayName : "Admin User "}
+              {user?.displayName ? user?.displayName : "Admin User "}
             </Box>
             <Box
               sx={{

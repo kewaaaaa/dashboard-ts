@@ -18,8 +18,8 @@ interface VerticalItemProps {
 const VerticalItem: React.FC<VerticalItemProps> = ({ level, item }) => {
   const { user } = useAuthUser();
   const hasPermission = useMemo(
-    () => checkPermission(item.permittedRole, user.role),
-    [item.permittedRole, user.role]
+    () => checkPermission(item.permittedRole, user?.role),
+    [item.permittedRole, user?.role]
   );
   if (!hasPermission) {
     return null;

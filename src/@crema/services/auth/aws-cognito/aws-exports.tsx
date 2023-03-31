@@ -14,7 +14,7 @@ export const awsConfig = {
       'email',
       'openid',
       'profile',
-      'aws.cognito.signin.user.admin',
+      'aws.cognito.signin.user?.admin',
     ],
     redirectSignIn: 'https://crema-react.firebaseapp.com/',
     redirectSignOut: 'https://crema-react.firebaseapp.com/',

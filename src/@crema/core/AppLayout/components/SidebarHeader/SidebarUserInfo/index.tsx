@@ -28,11 +28,11 @@ const SidebarUserInfo = () => {
   };
 
   const getUserAvatar = () => {
-    if (user.displayName) {
-      return user.displayName.charAt(0).toUpperCase();
+    if (user?.displayName) {
+      return user?.displayName.charAt(0).toUpperCase();
     }
-    if (user.email) {
-      return user.email.charAt(0).toUpperCase();
+    if (user?.email) {
+      return user?.email.charAt(0).toUpperCase();
     }
   };
 
@@ -47,7 +47,7 @@ const SidebarUserInfo = () => {
         borderBottom: `dashed 1px ${alpha(borderColor!, 0.4)}`,
       }}
     >
-      {user.photoURL ? (
+      {user?.photoURL ? (
         <Box
           sx={{
             position: "relative",
@@ -61,7 +61,7 @@ const SidebarUserInfo = () => {
             },
           }}
         >
-          <Avatar className="avatar-pic" src={user.photoURL} />
+          <Avatar className="avatar-pic" src={user?.photoURL} />
           <Status />
         </Box>
       ) : (
@@ -109,7 +109,7 @@ const SidebarUserInfo = () => {
             display: "flex",
           }}
         >
-          {user.displayName ? user.displayName : "Admin User "}
+          {user?.displayName ? user?.displayName : "Admin User "}
           <KeyboardArrowDownIcon className="arrowIcon" onClick={handleClick} />
         </Typography>
         <Typography
@@ -121,7 +121,7 @@ const SidebarUserInfo = () => {
             fontSize: 14,
           }}
         >
-          {user.email ? user.email : "demo@crema-react.com "}
+          {user?.email ? user?.email : "demo@crema-react.com "}
         </Typography>
       </Box>
       <Menu
